@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
+from .models import LinkModel
 
 class LoginForm(ModelForm):
     class Meta:
@@ -22,6 +23,32 @@ class LoginForm(ModelForm):
             'email': {
                 'required': ("Informe o e-mail."),
             },
+        }
+
+    from .models import LinkModel
+
+
+class LinkForm(forms.ModelForm):
+
+    class Meta:
+        model = LinkModel
+        fields = ['titulo', 'link', 'observacao']
+
+        widgets = {
+            'titulo': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Digite o título'
+            }),
+
+            'link': forms.URLInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Digite o link'
+            }),
+
+            'observacao': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Digite uma observação'
+            }),
         }
 
     def clean_email(self):
