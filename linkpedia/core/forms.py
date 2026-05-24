@@ -56,7 +56,11 @@ class LoginForm(ModelForm):
                 'Informe o e-mail.'
             )
 
-        if not email.endswith('@cps.sp.gov.br'):
+        if not (
+            email.endswith('@cps.sp.gov.br')
+            or
+            email.endswith('@aluno.cps.sp.gov.br')
+        ):
             raise ValidationError(
                 'Informe seu e-mail institucional.'
             )
